@@ -1,4 +1,4 @@
-# 📌 FitnessPro - Gym Management System
+#  FitnessPro - Gym Management System
 
 **FitnessPro** is a comprehensive, web-based Gym Management System designed to streamline fitness center operations. It provides a seamless interface for administrators to manage memberships and staff, trainers to curate personalized fitness journeys, and members to track their progress, diets, and workouts.
 
