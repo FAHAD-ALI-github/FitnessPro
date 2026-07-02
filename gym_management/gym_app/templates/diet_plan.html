@@ -109,6 +109,40 @@
         background: rgba(46, 213, 115, 0.1);
     }
 
+    /* Collapse/Expand Styles */
+    .plan-header {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .collapse-icon {
+        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+        color: var(--text-primary);
+    }
+
+    .collapse-icon.collapsed {
+        transform: rotate(-90deg);
+    }
+
+    .plan-content {
+        max-height: 3000px;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+        opacity: 1;
+        margin-top: 1rem;
+    }
+
+    .plan-content.collapsed {
+        max-height: 0;
+        opacity: 0;
+        margin-top: 0;
+    }
+
+    .plan-header:hover .collapse-icon {
+        color: var(--primary-color);
+    }
+
     @media (max-width: 768px) {
         .meal-table {
             display: block;
@@ -262,83 +296,90 @@
                             
                             {% for plan in all_plans %}
                             <div class="plan-card">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <h5 class="mb-0">{{ plan.name }}</h5>
-                                    <div>
-                                        {% if plan.total_calories %}
-                                        <span class="calorie-badge me-2">{{ plan.total_calories }} cal/day</span>
-                                        {% endif %}
-                                        {% if plan == assigned_plan %}
-                                        <span class="current-badge">Current Plan</span>
-                                        {% endif %}
+                                <div class="plan-header" onclick="togglePlan({{ forloop.counter }})">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <i class="fas fa-chevron-down collapse-icon collapsed" id="icon-{{ forloop.counter }}"></i>
+                                            <h5 class="mb-0">{{ plan.name }}</h5>
+                                        </div>
+                                        <div>
+                                            {% if plan.total_calories %}
+                                            <span class="calorie-badge me-2">{{ plan.total_calories }} cal/day</span>
+                                            {% endif %}
+                                            {% if plan == assigned_plan %}
+                                            <span class="current-badge">Current Plan</span>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <p class=" mb-3" style = "color : var(--text-muted)">{{ plan.description }}</p>
-                                <p class=" mb-3" style = "color : var(--text-muted)">
-                                    <small>
-                                        <i class="fas fa-user-tie me-1"></i>
-                                        By: {{ plan.trainer.first_name }} {{ plan.trainer.last_name }}
-                                    </small>
-                                </p>
+                                <div class="plan-content collapsed" id="plan-{{ forloop.counter }}">
+                                    <p class=" mb-3" style = "color : var(--text-muted)">{{ plan.description }}</p>
+                                    <p class=" mb-3" style = "color : var(--text-muted)">
+                                        <small>
+                                            <i class="fas fa-user-tie me-1"></i>
+                                            By: {{ plan.trainer.first_name }} {{ plan.trainer.last_name }}
+                                        </small>
+                                    </p>
 
-                                <!-- Weekly Meal Plan Table -->
-                                <div class="table-responsive">
-                                    <table class="meal-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Day</th>
-                                                <th>Breakfast</th>
-                                                <th>Lunch</th>
-                                                <th>Dinner</th>
-                                                <th>Snacks</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for day in plan.diet_days.all %}
-                                            <tr>
-                                                <td><strong>{{ day.day_name }}</strong></td>
-                                                <td>{{ day.breakfast|default:"—" }}</td>
-                                                <td>{{ day.lunch|default:"—" }}</td>
-                                                <td>{{ day.dinner|default:"—" }}</td>
-                                                <td>{{ day.snacks|default:"—" }}</td>
-                                            </tr>
-                                            {% empty %}
-                                            <tr>
-                                                <td colspan="5" class="text-center py-3" style="color: var(--text-muted)">
-                                                    No meal schedule available
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <!-- Alternative Card View for Mobile -->
-                                <div class="d-lg-none mt-3">
-                                    {% for day in plan.diet_days.all %}
-                                    <div class="day-card">
-                                        <h6 class="day-title">{{ day.day_name }}</h6>
-                                        <div class="meal-section">
-                                            <div class="meal-label">Breakfast</div>
-                                            <div class="meal-content">{{ day.breakfast|default:"Not specified" }}</div>
-                                        </div>
-                                        <div class="meal-section">
-                                            <div class="meal-label">Lunch</div>
-                                            <div class="meal-content">{{ day.lunch|default:"Not specified" }}</div>
-                                        </div>
-                                        <div class="meal-section">
-                                            <div class="meal-label">Dinner</div>
-                                            <div class="meal-content">{{ day.dinner|default:"Not specified" }}</div>
-                                        </div>
-                                        {% if day.snacks %}
-                                        <div class="meal-section">
-                                            <div class="meal-label">Snacks</div>
-                                            <div class="meal-content">{{ day.snacks }}</div>
-                                        </div>
-                                        {% endif %}
+                                    <!-- Weekly Meal Plan Table -->
+                                    <div class="table-responsive">
+                                        <table class="meal-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Day</th>
+                                                    <th>Breakfast</th>
+                                                    <th>Lunch</th>
+                                                    <th>Dinner</th>
+                                                    <th>Snacks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for day in plan.diet_days.all %}
+                                                <tr>
+                                                    <td><strong>{{ day.day_name }}</strong></td>
+                                                    <td>{{ day.breakfast|default:"—" }}</td>
+                                                    <td>{{ day.lunch|default:"—" }}</td>
+                                                    <td>{{ day.dinner|default:"—" }}</td>
+                                                    <td>{{ day.snacks|default:"—" }}</td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="5" class="text-center py-3" style="color: var(--text-muted)">
+                                                        No meal schedule available
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    {% endfor %}
+
+                                    <!-- Alternative Card View for Mobile -->
+                                    <div class="d-lg-none mt-3">
+                                        {% for day in plan.diet_days.all %}
+                                        <div class="day-card">
+                                            <h6 class="day-title">{{ day.day_name }}</h6>
+                                            <div class="meal-section">
+                                                <div class="meal-label">Breakfast</div>
+                                                <div class="meal-content">{{ day.breakfast|default:"Not specified" }}</div>
+                                            </div>
+                                            <div class="meal-section">
+                                                <div class="meal-label">Lunch</div>
+                                                <div class="meal-content">{{ day.lunch|default:"Not specified" }}</div>
+                                            </div>
+                                            <div class="meal-section">
+                                                <div class="meal-label">Dinner</div>
+                                                <div class="meal-content">{{ day.dinner|default:"Not specified" }}</div>
+                                            </div>
+                                            {% if day.snacks %}
+                                            <div class="meal-section">
+                                                <div class="meal-label">Snacks</div>
+                                                <div class="meal-content">{{ day.snacks }}</div>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                             {% empty %}
@@ -358,6 +399,15 @@
 
 {% block extra_js %}
 <script>
+    // Toggle plan collapse/expand
+    function togglePlan(planId) {
+        const content = document.getElementById(`plan-${planId}`);
+        const icon = document.getElementById(`icon-${planId}`);
+        
+        content.classList.toggle('collapsed');
+        icon.classList.toggle('collapsed');
+    }
+
     // Enhanced hover effects for diet plan cards
     const dietCards = document.querySelectorAll('.plan-card, .day-card');
     

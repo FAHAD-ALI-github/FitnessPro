@@ -83,6 +83,40 @@
     .exercise-item:last-child {
         border-bottom: none;
     }
+
+    /* Collapse/Expand Styles */
+    .plan-header {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .collapse-icon {
+        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+        color: var(--text-primary);
+    }
+
+    .collapse-icon.collapsed {
+        transform: rotate(-90deg);
+    }
+
+    .plan-content {
+        max-height: 2000px;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+        opacity: 1;
+        margin-top: 1rem;
+    }
+
+    .plan-content.collapsed {
+        max-height: 0;
+        opacity: 0;
+        margin-top: 0;
+    }
+
+    .plan-header:hover .collapse-icon {
+        color: var(--primary-color);
+    }
 </style>
 {% endblock %}
 
@@ -169,41 +203,48 @@
                             
                             {% for plan in all_plans %}
                             <div class="plan-card">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <h5 class="mb-0">{{ plan.name }}</h5>
-                                    <div>
-                                        <span class="difficulty-badge me-2">{{ plan.difficulty_level|capfirst }}</span>
-                                        {% if plan == assigned_plan %}
-                                        <span class="current-badge">Current Plan</span>
-                                        {% endif %}
+                                <div class="plan-header" onclick="togglePlan({{ forloop.counter }})">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <i class="fas fa-chevron-down collapse-icon" id="icon-{{ forloop.counter }}"></i>
+                                            <h5 class="mb-0">{{ plan.name }}</h5>
+                                        </div>
+                                        <div>
+                                            <span class="difficulty-badge me-2">{{ plan.difficulty_level|capfirst }}</span>
+                                            {% if plan == assigned_plan %}
+                                            <span class="current-badge">Current Plan</span>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <p class=" mb-3" style="color : var(--text-muted)">{{ plan.description }}</p>
-                                <p class=" mb-3" style="color : var(--text-muted)">
-                                    <small>
-                                        <i class="fas fa-user-tie me-1"></i>
-                                        By: {{ plan.trainer.first_name }} {{ plan.trainer.last_name }}
-                                    </small>
-                                </p>
+                                <div class="plan-content collapsed" id="plan-{{ forloop.counter }}">
+                                    <p class=" mb-3" style="color : var(--text-muted)">{{ plan.description }}</p>
+                                    <p class=" mb-3" style="color : var(--text-muted)">
+                                        <small>
+                                            <i class="fas fa-user-tie me-1"></i>
+                                            By: {{ plan.trainer.first_name }} {{ plan.trainer.last_name }}
+                                        </small>
+                                    </p>
 
-                                <!-- Workout Days -->
-                                <div class="week-plan">
-                                    {% for day in plan.workout_days.all %}
-                                    <div class="day-card mb-3">
-                                        <h6 class="day-title">{{ day.day_name }}</h6>
-                                        <div class="exercises-content">{{ day.exercises }}</div>
-                                        {% if day.notes %}
-                                        <div class="mt-2 p-2 bg-primary bg-opacity-10 rounded">
-                                            <small><strong>Notes:</strong> {{ day.notes }}</small>
+                                    <!-- Workout Days -->
+                                    <div class="week-plan">
+                                        {% for day in plan.workout_days.all %}
+                                        <div class="day-card mb-3">
+                                            <h6 class="day-title">{{ day.day_name }}</h6>
+                                            <div class="exercises-content">{{ day.exercises }}</div>
+                                            {% if day.notes %}
+                                            <div class="mt-2 p-2 bg-primary bg-opacity-10 rounded">
+                                                <small><strong>Notes:</strong> {{ day.notes }}</small>
+                                            </div>
+                                            {% endif %}
                                         </div>
-                                        {% endif %}
+                                        {% empty %}
+                                        <div class="text-center py-3">
+                                            <p   style = "color : var(--text-muted)"  >No workout schedule available</p>
+                                        </div>
+                                        {% endfor %}
                                     </div>
-                                    {% empty %}
-                                    <div class="text-center py-3">
-                                        <p   style = "color : var(--text-muted)"  >No workout schedule available</p>
-                                    </div>
-                                    {% endfor %}
                                 </div>
                             </div>
                             {% empty %}
@@ -223,6 +264,15 @@
 
 {% block extra_js %}
 <script>
+    // Toggle plan collapse/expand
+    function togglePlan(planId) {
+        const content = document.getElementById(`plan-${planId}`);
+        const icon = document.getElementById(`icon-${planId}`);
+        
+        content.classList.toggle('collapsed');
+        icon.classList.toggle('collapsed');
+    }
+
     // Enhanced hover effects for workout cards
     const workoutCards = document.querySelectorAll('.plan-card, .day-card');
     
