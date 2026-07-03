@@ -7,7 +7,10 @@
 ![SQLite](https://img.shields.io/badge/Database-SQLite3-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Active-success)
+![PythonAnywhere](https://img.shields.io/badge/Hosted%20on-PythonAnywhere-green)
 ![Made With Love](https://img.shields.io/badge/Made%20by-Fahad%20Ali-red)
+![GitHub stars](https://img.shields.io/github/stars/FAHAD-ALI-github/FitnessPro?style=social)
+![GitHub forks](https://img.shields.io/github/forks/FAHAD-ALI-github/FitnessPro?style=social)
 
 </p>
 
@@ -21,18 +24,21 @@ A comprehensive Gym Management System built with Django that streamlines member 
 
 ## 📚 Table of Contents
 
-- [📖Overview](#-overview)
+- [📖 Overview](#-overview)
 - [✨ Features](#-features)
 - [🛠 Tech Stack](#-tech-stack)
-- [🏗 Project Architecture](#-project-architecture)
+- [🎥 Project Demonstration](#-project-demonstration)
+- [📸 Screenshots](#-screenshots)
+- [🏗 System Architecture](#-system-architecture)
+- [📦 Package Diagram](#-package-diagram)
+- [📘 Class Diagram](#-class-diagram)
+- [🗄 Database Schema](#-database-schema)
 - [📁 Folder Structure](#-folder-structure)
 - [🚀 Installation](#-installation)
 - [⚙ Configuration](#-configuration)
 - [🔑 Environment Variables](#-environment-variables)
 - [▶ Usage](#-usage)
-- [📸 Screenshots](#-screenshots)
 - [🌐 Live Demo](#-live-demo)
-- [📊 Database Schema](#-database-schema)
 - [🔌 API Endpoints](#-api-endpoints)
 - [🧪 Testing](#-testing)
 - [🗺 Roadmap](#-roadmap)
@@ -99,52 +105,163 @@ The application addresses critical operational hurdles by running automated back
 
 ---
 
-# 🏗 Project Architecture
+# 🎥 Live Project Demonstration
 
-FitnessPro follows the standardized architectural pattern of **Django Apps**, decoupling configurations from application features:
+Experience the complete walkthrough of **FitnessPro**, including:
+
+- ✅ User Registration
+- ✅ Member Dashboard
+- ✅ Trainer Panel
+- ✅ Admin Dashboard
+- ✅ Workout & Diet Plans
+- ✅ Membership Management
+- ✅ Analytics & Reports
+
+### 📺 Watch the Complete Demo
+
+<p align="center">
+  <a href="https://youtu.be/EADJlJ750hc?si=g4_LrJDVJjy31yAe" target="_blank">
+    <img src="static/images/thumbnail.png"
+         alt="FitnessPro Project Demo"
+         width="800">
+  </a>
+</p>
+
+<p align="center">
+  <strong>👆 Click the thumbnail to watch the full demo on YouTube</strong>
+</p>
 
 
-```
+---
 
-┌─────────────────────────────────────────────────────────────────┐
-│                     Client Browser Layer                        │
-│       (Admin Dashboards / Trainer Views / Member Panels)        │
-└────────────────────────────────┬────────────────────────────────┘
-                                 │ HTTP Requests / Session Cores
-                                 ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    Django URL Routing Layer                     │
-│    (Root Core patterns mapped directly into gym_app modules)    │
-└────────────────────────────────┬────────────────────────────────┘
-                                 │ Matches Endpoint Path
-                                 ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                        Views Processor                          │
-│     (Processes inputs, checks authentication states, runs logic)│
-└────────────────────────────────┬────────────────────────────────┘
-                                 │ ORM CRUD operations
-                                 ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                       Django ORM / Models                       │
-│     (Manages database entities, query abstraction, constraints) │
-└────────────────────────────────┬────────────────────────────────┘
-                                 │ Executes queries
-                                 ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                        SQLite Database                          │
-└─────────────────────────────────────────────────────────────────┘
-                                 ▲
-                                 │ Queries / State Updates
-┌────────────────────────────────┴────────────────────────────────┐
-│                   Background Worker Loop                        │
-│  (APScheduler Cron Task triggering every 24 hours internally)   │
-└─────────────────────────────────────────────────────────────────┐
+# 📸 Screenshots
 
-```
+A quick preview of the application's user interface.
 
-- **Authentication Handling:** Handled via Django's secure request middleware storing active session markers (`user_id`, `trainer_id`, `admin_logged_in`).
-- **Context Abstraction Layer:** Custom context processors injection (`logged_in_user`, `gym_info_context`) mapping dynamic context attributes into active presentation layers smoothly.
+<p align="center">
+  <img src="static/images/login-page.png" width="45%" alt="Login Page"/>
+  <img src="static/images/admin-dashboard.png" width="45%" alt="Admin Dashboard"/>
+</p>
 
+<br>
+
+<p align="center">
+  <img src="static/images/member-dashboard.png" width="45%" alt="Member Dashboard"/>
+  <img src="static/images/trainer-dashboard.png" width="45%" alt="Trainer Dashboard"/>
+</p>
+
+---
+
+# 🏗 System Architecture
+
+The following diagram presents the high-level architecture of the **FitnessPro** application, illustrating how client requests flow through the Django framework, interact with the database, and are supported by background services.
+
+<p align="center">
+  <a href="static/images/arch.png">
+    <img src="static/images/arch.png"
+         alt="FitnessPro System Architecture"
+         width="1000">
+  </a>
+</p>
+
+<p align="center">
+Click the diagram to view it in full resolution.
+</p>
+
+### Architecture Highlights
+
+- Multi-role web interface for Members, Trainers, and Administrators.
+- Django URL routing and request handling.
+- Business logic implemented through Django Views.
+- Data persistence using Django ORM and SQLite.
+- Automated background jobs powered by APScheduler.
+  
+---
+
+# 📦 Package Diagram
+
+The package diagram illustrates the modular organization of the **FitnessPro** application and the dependencies between its core packages.
+
+<p align="center">
+  <a href="static/images/package-diagram.png">
+    <img
+      src="static/images/package-diagram.png"
+      alt="FitnessPro Package Diagram"
+      width="1000">
+  </a>
+</p>
+
+<p align="center">
+Click the diagram to view it in full resolution.
+</p>
+
+### Package Overview
+
+- **gym_management/** – Django project configuration
+- **gym_app/** – Core application logic
+- **management/commands/** – Custom Django management commands
+- **templates/** – HTML templates
+- **static/** – CSS, JavaScript and images
+- **media/** – Uploaded user files
+
+---
+
+
+# 📘 Class Diagram
+
+The class diagram represents the application's object-oriented structure, including the primary models, relationships, and responsibilities.
+
+<p align="center">
+  <a href="static/images/class-diagram.png">
+    <img
+      src="static/images/class-diagram.png"
+      alt="FitnessPro Class Diagram"
+      width="1000">
+  </a>
+</p>
+
+<p align="center">
+Click the diagram to view it in full resolution.
+</p>
+
+### Key Components
+
+- User & Authentication Models
+- Trainer Management
+- Membership Plans
+- Workout Plans
+- Diet Plans
+- Attendance Tracking
+- Payment Verification
+
+---
+
+# 🗄 Database Schema
+
+The following Entity Relationship Diagram (ERD) illustrates the database design used by **FitnessPro**.
+
+<p align="center">
+  <a href="static/images/database-schema.png">
+    <img
+      src="static/images/database-schema.png"
+      alt="FitnessPro Database Schema"
+      width="1000">
+  </a>
+</p>
+
+<p align="center">
+Click the diagram to view it in full resolution.
+</p>
+
+### Database Highlights
+
+- Normalized relational schema
+- Foreign key relationships
+- Membership tracking
+- Trainer assignments
+- Workout & Diet management
+- Attendance records
+  
 ---
 
 # 📁 Folder Structure
@@ -179,72 +296,112 @@ gym_management/
 
 # 🚀 Installation
 
-### Prerequisites
-- Python 3.10+ installed locally.
+Follow these steps to run **FitnessPro** locally.
 
-### Steps
+## Prerequisites
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/FAHAD-ALI-github/FitnessPro.git](https://github.com/FAHAD-ALI-github/FitnessPro.git)
-   cd FitnessPro
+Make sure you have the following installed:
 
+- Python 3.10+
+- pip
+- Git
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/FAHAD-ALI-github/FitnessPro.git
+cd FitnessPro
 ```
 
-2. **Establish and source local virtual environments:**
+## 2. Create a Virtual Environment
+
 ```bash
 python -m venv .venv
-# Windows activation:
-.venv\Scripts\activate
-# Linux/MacOS activation:
-source .venv/bin/activate
-
 ```
 
+### Windows
 
-3. **Install fundamental execution requirements:**
+```bash
+.venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+source .venv/bin/activate
+```
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+> If `requirements.txt` is unavailable:
+
 ```bash
 pip install django django-apscheduler requests
-
 ```
 
+## 4. Apply Database Migrations
 
-4. **Initialize database schemas via migrations:**
 ```bash
 python manage.py migrate
-
 ```
 
+## 5. Seed Initial Data
 
-5. **Populate initial application mock parameters:**
 ```bash
 python manage.py seed_initial_data
 python manage.py seed_trainers
 python manage.py seed_professional_plans
-
 ```
 
+## 6. Run the Development Server
+
+```bash
+python manage.py runserver
+```
+
+Open your browser and visit:
+
+```
+http://127.0.0.1:8000/
+```
 
 
 ---
 
 # ⚙ Configuration
 
-Key configuration options are accessible within `gym_management/settings.py`. Out-of-the-box setups contain functional parameters targeting SQLite bindings and active local directories.
+FitnessPro uses Django's standard configuration system.
 
-### Media & Document Handling
+Key configuration options can be found in:
 
-File structures for personal trainer photos, client profiles, and billing invoices attach to defined subdirectories under disk root:
+```text
+gym_management/settings.py
+```
+
+## Static Files
 
 ```python
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
+STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 ```
+
+## Media Files
+
+```python
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+```
+
+## Database
+
+The project uses **SQLite** by default for local development.
+
+You can easily switch to PostgreSQL or MySQL by updating the `DATABASES` configuration in `settings.py`.
 
 ---
 
@@ -262,43 +419,53 @@ The system supports explicit integration values used during production delivery 
 
 # ▶ Usage
 
-### Launching Development Environment
-
-Execute the server using the default administration tool:
+## Start the Development Server
 
 ```bash
 python manage.py runserver
-
 ```
 
-The server will boot on `http://127.0.0.1:8000/`.
+Open:
 
-### Administrative Credentials
-
-* **Username:** `admin`
-* **Password:** `admin123`
-
-### Initiating Background Task Check Manually
-
-If you need to bypass the 24-hour interval timer to audit membership accounts immediately, trigger the internal management tool:
-
-```bash
-python manage.py check_membership_expiration
-
+```
+http://127.0.0.1:8000/
 ```
 
 ---
 
-# 📸 Screenshots
+## Default Administrator Credentials
 
-> Add application screenshots here.
+| Username | Password |
+|----------|----------|
+| admin | admin123 |
+
+---
+
+## Run Membership Expiration Checker
+
+```bash
+python manage.py check_membership_expiration
+```
+
+This command manually triggers the APScheduler membership validation logic without waiting for the scheduled interval.
 
 ---
 
 # 🌐 Live Demo
 
-Explore the live environment via the production instance:
-[https://your-live-demo-link.com](https://www.google.com/search?q=https://your-live-demo-link.com)
+Experience the deployed version of the project.
+
+<p align="center">
+
+### 🚀 Live Website
+
+https://fitnesspro.pythonanywhere.com/
+
+</p>
+
+> **Note**
+>
+> The hosted version may occasionally be unavailable due to free hosting limitations on PythonAnywhere.
 
 ---
 
@@ -346,39 +513,51 @@ erDiagram
 
 # 🔌 API Endpoints
 
-While interaction primarily depends upon functional internal views routing directly into server-side Django HTML templates, the app defines explicit control boundaries mapping user scopes:
+The following table summarizes the primary routes exposed by the application.
 
-| Method | Access Scope | Functional Mapping Route | Purpose |
-| --- | --- | --- | --- |
-| `GET` | Public | `/` | Home landing page listing active fitness experts |
-| `POST` | Public | `/user_login` | Authenticates active user sessions |
-| `POST` | Public | `/trainer_login` | Authenticates trainer portal entries |
-| `POST` | Public | `/admin_login` | Grants access to system administration dashboard |
-| `POST` | Public | `/new_registration` | Creates registration pending approval |
-| `POST` | Member | `/upload_profile_image/` | Asynchronously commits profile pictures |
-| `POST` | Trainer | `/trainer/upload_profile_image/` | Commits specialized profile pictures |
-| `POST` | Admin | `/approve_payment/<int:user_id>` | Approves user and updates membership end dates |
+| Method | Endpoint | Description |
+|----------|----------|-------------|
+| GET | `/` | Home Page |
+| POST | `/user_login` | User Login |
+| POST | `/trainer_login` | Trainer Login |
+| POST | `/admin_login` | Administrator Login |
+| POST | `/new_registration` | User Registration |
+| POST | `/upload_profile_image/` | Upload User Profile Image |
+| POST | `/trainer/upload_profile_image/` | Upload Trainer Profile Image |
+| POST | `/approve_payment/<user_id>` | Approve Membership Payment |
 
 ---
 
 # 🧪 Testing
 
-The codebase includes standard test files ready for specific test-driven extensions:
+Run Django's built-in test suite:
 
 ```bash
-python manage.py test gym_management.gym_app
-
+python manage.py test
 ```
 
+Or test only the application:
+
+```bash
+python manage.py test gym_app
+```
 ---
 
 # 🗺 Roadmap
 
-* [ ] Add an interactive real-time class scheduler for group training events.
-* [ ] Implement integrated credit/debit card payment processing via Stripe or Braintree.
-* [ ] Build a WebSocket-powered group messaging chat client linking trainers directly with their active members.
-* [ ] Provide comprehensive export data pipelines allowing PDF/Excel downloads of financial revenue charts.
-
+- [ ] PostgreSQL support
+- [ ] Docker deployment
+- [ ] REST API for mobile integration
+- [ ] JWT Authentication
+- [ ] Email verification
+- [ ] Online payment gateway integration
+- [ ] QR Code member check-in
+- [ ] Real-time notifications
+- [ ] WebSocket-powered messaging
+- [ ] Export reports to PDF & Excel
+- [ ] Multi-gym support
+- [ ] Dark mode
+      
 ---
 
 # 🤝 Contributing
@@ -396,16 +575,19 @@ python manage.py test gym_management.gym_app
 This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
 
 ---
-
 # 👤 Author
 
-**Fahad Ali**
+<div align="center">
 
-GitHub:
-https://github.com/FAHAD-ALI-github
+## Fahad Ali
 
-LinkedIn:
-https://www.linkedin.com/in/fahadali1078/
+**Software Engineer | Full Stack Python Developer | AI Engineer**
+
+[![GitHub](https://img.shields.io/badge/GitHub-FAHAD--ALI--github-black?logo=github)](https://github.com/FAHAD-ALI-github)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Fahad%20Ali-blue?logo=linkedin)](https://www.linkedin.com/in/fahadali1078)
+</div>
+
+---
 
 
 
