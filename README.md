@@ -9,8 +9,7 @@
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![PythonAnywhere](https://img.shields.io/badge/Hosted%20on-PythonAnywhere-green)
 ![Made With Love](https://img.shields.io/badge/Made%20by-Fahad%20Ali-red)
-![GitHub stars](https://img.shields.io/github/stars/FAHAD-ALI-github/FitnessPro?style=social)
-![GitHub forks](https://img.shields.io/github/forks/FAHAD-ALI-github/FitnessPro?style=social)
+
 
 </p>
 
