@@ -1,4 +1,4 @@
-# 📌 FitnessPro
+#  FitnessPro
 
 <p align="center">
 
@@ -108,36 +108,36 @@ FitnessPro follows the standardized architectural pattern of **Django Apps**, de
 
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Client Browser Layer                        │
-│       (Admin Dashboards / Trainer Views / Member Panels)         │
+│       (Admin Dashboards / Trainer Views / Member Panels)        │
 └────────────────────────────────┬────────────────────────────────┘
-│ HTTP Requests / Session Cores
-▼
+                                 │ HTTP Requests / Session Cores
+                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Django URL Routing Layer                     │
 │    (Root Core patterns mapped directly into gym_app modules)    │
 └────────────────────────────────┬────────────────────────────────┘
-│ Matches Endpoint Path
-▼
+                                 │ Matches Endpoint Path
+                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                        Views Processor                          │
 │     (Processes inputs, checks authentication states, runs logic)│
 └────────────────────────────────┬────────────────────────────────┘
-│ ORM CRUD operations
-▼
+                                 │ ORM CRUD operations
+                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                       Django ORM / Models                       │
 │     (Manages database entities, query abstraction, constraints) │
 └────────────────────────────────┬────────────────────────────────┘
-│ Executes queries
-▼
+                                 │ Executes queries
+                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                        SQLite Database                          │
 └─────────────────────────────────────────────────────────────────┘
-▲
-│ Queries / State Updates
+                                 ▲
+                                 │ Queries / State Updates
 ┌────────────────────────────────┴────────────────────────────────┐
 │                   Background Worker Loop                        │
-│    (APScheduler Cron Task triggering every 24 hours internally)   │
+│  (APScheduler Cron Task triggering every 24 hours internally)   │
 └─────────────────────────────────────────────────────────────────┐
 
 ```
