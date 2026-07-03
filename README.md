@@ -27,7 +27,7 @@ A comprehensive Gym Management System built with Django that streamlines member 
 - [📖 Overview](#-overview)
 - [✨ Features](#-features)
 - [🛠 Tech Stack](#-tech-stack)
-- [🎥 Project Demonstration](#-project-demonstration)
+- [🎥 Project Demonstration](#-live-project-demonstration)
 - [📸 Screenshots](#-screenshots)
 - [🏗 System Architecture](#-system-architecture)
 - [📦 Package Diagram](#-package-diagram)
@@ -121,7 +121,7 @@ Experience the complete walkthrough of **FitnessPro**, including:
 
 <p align="center">
   <a href="https://youtu.be/EADJlJ750hc?si=g4_LrJDVJjy31yAe" target="_blank">
-    <img src="static/images/thumbnail.png"
+    <img src="static/images/thumbnail.jpeg"
          alt="FitnessPro Project Demo"
          width="800">
   </a>
@@ -545,18 +545,18 @@ python manage.py test gym_app
 
 # 🗺 Roadmap
 
-- [ ] PostgreSQL support
-- [ ] Docker deployment
-- [ ] REST API for mobile integration
-- [ ] JWT Authentication
-- [ ] Email verification
-- [ ] Online payment gateway integration
-- [ ] QR Code member check-in
-- [ ] Real-time notifications
-- [ ] WebSocket-powered messaging
-- [ ] Export reports to PDF & Excel
-- [ ] Multi-gym support
-- [ ] Dark mode
+- PostgreSQL support
+- Docker deployment
+- REST API for mobile integration
+- JWT Authentication
+- Email verification
+- Online payment gateway integration
+- QR Code member check-in
+- Real-time notifications
+- WebSocket-powered messaging
+- Export reports to PDF & Excel
+- Multi-gym support
+- Dark mode
       
 ---
 
