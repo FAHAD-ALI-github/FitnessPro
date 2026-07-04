@@ -119,7 +119,7 @@ Experience the complete walkthrough of **FitnessPro**, including:
 ### 📺 Watch the Complete Demo
 
 <p align="center">
-  <a href="https://youtu.be/EADJlJ750hc?si=g4_LrJDVJjy31yAe" target="_blank">
+  <a href="https://www.youtube.com/watch?v=YaKLAOQ5XsI" target="_blank">
     <img src="static/images/thumbnail.jpeg"
          alt="FitnessPro Project Demo"
          width="800">
