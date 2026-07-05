@@ -43,7 +43,7 @@ A comprehensive Gym Management System built with Django that streamlines member 
 - [🗺 Roadmap](#-roadmap)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
-- [👤 Author](#-author)
+- [👤 Developer](#-developer)
 
 ---
 
@@ -574,7 +574,7 @@ python manage.py test gym_app
 This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
 
 ---
-# 👤 Author
+# 👤 Developer
 
 <div align="center">
 
